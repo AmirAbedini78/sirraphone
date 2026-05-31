@@ -56,3 +56,7 @@ git push -u origin main
 ```
 
 Do not commit `node_modules`, `dist`, generated installers, or local `.env` files.
+
+
+## UI Note
+This build keeps the compact Sierra Phone window sizing from the stable PBXShop UI version, removes the side text next to the logo, and uses the uploaded PBXShop white SVG inside a slightly larger logo box.

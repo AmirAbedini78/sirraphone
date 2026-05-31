@@ -13,13 +13,13 @@ function createWindow() {
   win = new BrowserWindow({
     width: 360,
     height: 590,
-    minWidth: 360,
-    minHeight: 590,
-    maxWidth: 360,
-    maxHeight: 590,
+    minWidth: 340,
+    minHeight: 540,
+    maxWidth: 430,
+    maxHeight: 690,
     title: 'سیرا فون',
     backgroundColor: '#06152f',
-    resizable: false,
+    resizable: true,
     autoHideMenuBar: true,
     menuBarVisible: false,
     webPreferences: {
