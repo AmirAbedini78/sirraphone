@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self';">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>سیرا فون</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="phone-shell">
+    <header class="status-header">
+      <div class="brand-row compact-brand">
+        <div class="app-icon brand-logo-box"><img src="assets/pbxshop-white-002.svg" alt="PBXShop" /></div>
+        <div class="connection" id="connectionBadge">آماده</div>
+      </div>
+    </header>
+
+    <main class="screen">
+      <section class="view active" id="view-dialer">
+        <div class="number-box">
+          <input id="dialNumber" class="dial-input" dir="ltr" placeholder="101 / 600 / شماره مقصد" />
+          <button id="backspaceBtn" class="icon-btn">⌫</button>
+        </div>
+        <div class="keypad" id="keypad"></div>
+        <div class="call-actions">
+          <button id="callBtn" class="call-btn">تماس</button>
+          <button id="hangupBtn" class="hang-btn">قطع</button>
+        </div>
+        <div class="quick-status" id="quickStatus">برای شروع، اکانت را در بخش تنظیمات وارد و اتصال را بزنید.</div>
+      </section>
+
+      <section class="view" id="view-account">
+        <h2>اکانت SIP</h2>
+        <div class="form compact-form">
+          <label>نام نمایشی<input id="accountName" placeholder="مثلاً فروش 101"></label>
+          <label>سرور ۱<input id="server1" dir="ltr" placeholder="192.168.1.10"></label>
+          <label>سرور ۲<input id="server2" dir="ltr" placeholder="اختیاری"></label>
+          <label>سرور ۳<input id="server3" dir="ltr" placeholder="اختیاری"></label>
+          <label>داخلی / Username<input id="extension" dir="ltr" placeholder="101"></label>
+          <label>رمز عبور<input id="password" type="password" dir="ltr" placeholder="••••••"></label>
+          <details>
+            <summary>تنظیمات پیشرفته</summary>
+            <label>Auth Username<input id="username" dir="ltr" placeholder="اگر با داخلی فرق دارد"></label>
+            <label>Domain / Realm<input id="domain" dir="ltr" placeholder="معمولاً همان سرور"></label>
+            <div class="row2">
+              <label>Port<input id="port" dir="ltr" value="5060"></label>
+              <label>Local<input id="localPort" dir="ltr" value="5066"></label>
+            </div>
+            <label>Transport<select id="transport"><option value="udp">UDP</option><option value="tcp">TCP</option><option value="tls">TLS</option></select></label>
+            <label>Outbound Proxy<input id="outboundProxy" dir="ltr" placeholder="اختیاری"></label>
+            <label>Log Level<select id="logLevel"><option>3</option><option selected>4</option><option>5</option><option>6</option></select></label>
+          </details>
+        </div>
+        <div class="account-actions">
+          <button id="saveConfig" class="secondary-btn">ذخیره</button>
+          <button id="registerBtn" class="primary-btn">اتصال</button>
+          <button id="stopBtn" class="ghost-danger">قطع اتصال</button>
+        </div>
+        <div class="engine-note" id="engineNote">در حال بررسی موتور تماس...</div>
+      </section>
+
+      <section class="view" id="view-contacts">
+        <div class="section-head"><h2>کانتکت‌ها</h2><button id="addContactBtn" class="mini-btn">+</button></div>
+        <div class="contact-form hidden" id="contactForm">
+          <input id="contactName" placeholder="نام" />
+          <input id="contactNumber" dir="ltr" placeholder="داخلی / شماره" />
+          <button id="saveContactBtn" class="primary-btn small">افزودن</button>
+        </div>
+        <div id="contactsList" class="list empty">کانتکتی ثبت نشده است.</div>
+      </section>
+
+      <section class="view" id="view-history">
+        <div class="section-head"><h2>سابقه تماس</h2><button id="clearHistoryBtn" class="mini-btn danger-mini">پاک</button></div>
+        <div id="historyList" class="list empty">هنوز تماسی ثبت نشده است.</div>
+      </section>
+
+      <section class="view" id="view-logs">
+        <div class="section-head"><h2>لاگ</h2><button id="clearLogs" class="mini-btn">پاک</button></div>
+        <pre id="logs" class="log-box"></pre>
+      </section>
+    </main>
+
+    <nav class="bottom-nav">
+      <button class="tab-btn active" data-view="dialer">☎<span>تلفن</span></button>
+      <button class="tab-btn" data-view="account">⚙<span>اکانت</span></button>
+      <button class="tab-btn" data-view="contacts">👤<span>کانتکت</span></button>
+      <button class="tab-btn" data-view="history">↺<span>سابقه</span></button>
+      <button class="tab-btn" data-view="logs">≡<span>لاگ</span></button>
+    </nav>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Asterisk Softphone</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo">SIP</div>
+        <div>
+          <h1>Asterisk Softphone</h1>
+          <p>Classic SIP via PJSUA</p>
+        </div>
+      </div>
+      <button class="tab active" data-tab="account">اکانت</button>
+      <button class="tab" data-tab="dialer">شماره‌گیر</button>
+      <button class="tab" data-tab="test">تست</button>
+      <button class="tab" data-tab="logs">لاگ‌ها</button>
+      <div class="status-card">
+        <span>وضعیت</span>
+        <strong id="statusText">در حال آماده‌سازی</strong>
+      </div>
+    </aside>
+
+    <main class="content">
+      <section id="account" class="panel active">
+        <h2>تنظیم داخلی SIP</h2>
+        <p class="muted">مثل Bria/Zoiper فقط اطلاعات اصلی را وارد کنید. گزینه‌های فنی داخل Advanced هستند.</p>
+        <div class="grid">
+          <label>نام اکانت<input id="accountName" value="داخلی شرکت" /></label>
+          <label>Server 1 / IP ایزابل<input id="server1" placeholder="192.168.1.10" /></label>
+          <label>Server 2 اختیاری<input id="server2" /></label>
+          <label>Server 3 اختیاری<input id="server3" /></label>
+          <label>Extension / Username<input id="username" placeholder="101" /></label>
+          <label>Password<input id="password" type="password" placeholder="secret" /></label>
+        </div>
+        <details>
+          <summary>Advanced</summary>
+          <div class="grid">
+            <label>Auth Username<input id="authUser" placeholder="اگر خالی باشد همان Username استفاده می‌شود" /></label>
+            <label>Port<input id="port" value="5060" /></label>
+            <label>Transport
+              <select id="transport">
+                <option value="udp">UDP</option>
+                <option value="tcp">TCP</option>
+                <option value="tls">TLS</option>
+              </select>
+            </label>
+            <label>Realm<input id="realm" value="*" /></label>
+            <label>Outbound Proxy<input id="proxy" placeholder="sip:proxy.example.com;lr" /></label>
+            <label>Log Level<input id="logLevel" value="5" /></label>
+          </div>
+        </details>
+        <div class="actions">
+          <button id="saveConfig">ذخیره تنظیمات</button>
+          <button id="registerBtn" class="primary">Register / اتصال</button>
+          <button id="stopBtn" class="danger">Stop</button>
+        </div>
+      </section>
+
+      <section id="dialer" class="panel">
+        <h2>شماره‌گیر</h2>
+        <p class="muted">داخلی، شماره صف، Ring Group یا IVR را مثل Bria وارد کنید.</p>
+        <div class="dial-box">
+          <input id="destination" placeholder="مثلاً 101 یا 600" />
+          <button id="callBtn" class="primary">Call</button>
+          <button id="hangupBtn" class="danger">Hangup</button>
+        </div>
+        <div class="keypad" id="keypad"></div>
+      </section>
+
+      <section id="test" class="panel">
+        <h2>تست</h2>
+        <div class="actions">
+          <button id="checkEngineBtn">تست فایل باینری PJSUA</button>
+          <button id="testServerBtn">تست TCP سرور SIP</button>
+        </div>
+        <pre id="testOutput" class="box"></pre>
+      </section>
+
+      <section id="logs" class="panel">
+        <h2>لاگ‌ها</h2>
+        <div class="actions"><button id="clearLogs">پاک کردن</button></div>
+        <pre id="logsBox" class="box live"></pre>
+      </section>
+    </main>
+  </div>
+  <script src="./renderer.js"></script>
+</body>
+</html>

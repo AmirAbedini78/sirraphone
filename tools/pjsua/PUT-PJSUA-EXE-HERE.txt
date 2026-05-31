@@ -1,0 +1,6 @@
+Put your Windows PJSUA binary here with this exact name:
+
+pjsua.exe
+
+Final path:
+tools\pjsua\pjsua.exe

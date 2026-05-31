@@ -1,0 +1,43 @@
+{
+  "name": "sierra-phone",
+  "version": "1.1.0",
+  "description": "Sierra Phone compact Electron softphone UI for PBXShop Sierra with native PJSUA SIP engine wrapper.",
+  "main": "src/main/main.js",
+  "scripts": {
+    "start": "electron .",
+    "check:engine": "node scripts/check-engine.js",
+    "dist:dir": "electron-builder --win --dir",
+    "dist:win": "electron-builder --win nsis"
+  },
+  "keywords": ["electron", "asterisk", "issabel", "sip", "pjsip", "pjsua", "softphone"],
+  "author": "PBXShop Sierra Phone Project",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "electron": "31.7.7",
+    "electron-builder": "24.13.3"
+  },
+  "build": {
+    "appId": "co.pbxshop.sierra.phone",
+    "productName": "Sierra Phone",
+    "asar": false,
+    "files": [
+      "src/**/*",
+      "assets/**/*",
+      "tools/**/*",
+      "docs/**/*",
+      "package.json"
+    ],
+    "directories": {"output": "dist"},
+    "win": {
+      "target": "nsis",
+      "signAndEditExecutable": false
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  }
+}
