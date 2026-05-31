@@ -1,62 +1,177 @@
-# Asterisk Native Softphone
+# سیرا فون
 
-Electron UI + Native PJSUA engine for classic SIP UDP/TCP/TLS registration and calls.
+**سیرا فون** نرم‌افزار دسکتاپ سبک، جمع‌وجور و اختصاصی برند PBXShop برای برقراری تماس‌های سازمانی مبتنی بر SIP است. این پروژه با Electron ساخته شده و از یک موتور Native برای مدیریت تماس، رجیستر شدن داخلی، شماره‌گیری، تاریخچه تماس‌ها و کانتکت‌ها استفاده می‌کند.
 
-## Quick start
+هدف این پروژه ساخت یک تلفن نرم‌افزاری ساده، قابل توسعه و مناسب استفاده سازمانی است؛ با ظاهری کوچک و کاربردی شبیه یک تلفن رومیزی یا سافت‌فون حرفه‌ای.
 
-```bat
+---
+
+## امکانات اصلی
+
+- رابط کاربری کوچک و جمع‌وجور
+- شماره‌گیر نرم‌افزاری
+- اتصال به حساب SIP
+- نمایش وضعیت اتصال
+- ثبت تاریخچه تماس‌ها
+- بخش کانتکت‌ها
+- لاگ داخلی برای بررسی وضعیت نرم‌افزار
+- استفاده از موتور Native برای ارتباطات صوتی
+- آماده برای توسعه و شخصی‌سازی برند
+
+---
+
+## ساختار کلی پروژه
+
+```text
+sierra-phone/
+├── src/
+│   ├── main/
+│   │   ├── main.js
+│   │   ├── preload.js
+│   │   ├── store.js
+│   │   └── pjsua-engine.js
+│   └── renderer/
+│       ├── index.html
+│       ├── styles.css
+│       ├── app.js
+│       └── assets/
+├── tools/
+│   └── pjsua/
+│       └── pjsua.exe
+├── docs/
+├── scripts/
+├── package.json
+└── README.md
+```
+
+---
+
+## توضیح فایل‌های مهم
+
+### `src/main/main.js`
+فایل اصلی اجرای Electron است. پنجره برنامه، تنظیمات امنیتی، اندازه پنجره و ارتباط بین رابط کاربری و بخش سیستمی از این فایل مدیریت می‌شود.
+
+### `src/main/pjsua-engine.js`
+لایه ارتباط با موتور Native است. این فایل مسئول پیدا کردن فایل اجرایی موتور، اجرای آن، ارسال دستورهای تماس و دریافت خروجی‌هاست.
+
+### `src/main/store.js`
+برای ذخیره‌سازی تنظیمات ساده نرم‌افزار استفاده می‌شود؛ مثل اطلاعات حساب، کانتکت‌ها یا تنظیمات داخلی.
+
+### `src/renderer/index.html`
+ساختار ظاهری نرم‌افزار را تعریف می‌کند؛ شامل شماره‌گیر، وضعیت اتصال، کانتکت‌ها، تاریخچه تماس‌ها و لاگ‌ها.
+
+### `src/renderer/styles.css`
+تمام استایل‌ها، رنگ‌بندی برند، اندازه پنجره، چینش عناصر و ظاهر جمع‌وجور نرم‌افزار در این فایل قرار دارد.
+
+### `src/renderer/app.js`
+منطق رابط کاربری است؛ مثل کلیک روی دکمه‌ها، ثبت کانتکت، شماره‌گیری، نمایش وضعیت و بروزرسانی تاریخچه تماس‌ها.
+
+### `tools/pjsua/pjsua.exe`
+موتور Native تماس است. این فایل باید در همین مسیر قرار داشته باشد تا نرم‌افزار بتواند اتصال و تماس را مدیریت کند.
+
+---
+
+## نصب و اجرای پروژه
+
+ابتدا وابستگی‌ها را نصب کنید:
+
+```bash
+npm install
+```
+
+سپس نرم‌افزار را اجرا کنید:
+
+```bash
 npm start
 ```
 
-The SIP engine path is:
+---
 
-```txt
-tools\pjsua\pjsua.exe
+## آماده‌سازی موتور تماس
+
+برای اینکه نرم‌افزار بتواند تماس واقعی برقرار کند، فایل زیر باید وجود داشته باشد:
+
+```text
+tools/pjsua/pjsua.exe
 ```
 
-This package includes the `pjsua.exe` that was provided for testing. If you replace it, keep the same name and path.
+اگر این فایل حذف شده یا در مسیر دیگری باشد، نرم‌افزار نمی‌تواند موتور تماس را شناسایی کند.
 
-## Basic SIP config
+برای تست دستی فایل می‌توانید در ریشه پروژه اجرا کنید:
 
-- Account Name: any label, e.g. Sales 101
-- Server 1: Issabel/Asterisk IP, e.g. 192.168.1.10
-- Extension / Username: e.g. 101
-- Password: extension secret
-- Transport: usually UDP
-- Port: usually 5060
-
-Queues, Ring Groups and IVR are dialed like normal numbers, e.g. 600 or 700.
-
-## Test engine manually
-
-```bat
-tools\pjsua\pjsua.exe --version
+```bash
+tools\pjsua\pjsua.exe --help
 ```
 
-## Build portable
+اگر پنجره خط فرمان باز شد یا راهنمای برنامه نمایش داده شد، فایل اجرایی سالم است.
 
-```bat
-npm run dist:dir
+---
+
+## نحوه استفاده از نرم‌افزار
+
+1. نرم‌افزار را اجرا کنید.
+2. اطلاعات حساب SIP را وارد کنید.
+3. دکمه اتصال را بزنید.
+4. پس از نمایش وضعیت اتصال، شماره مقصد را وارد کنید.
+5. با دکمه تماس، تماس را برقرار کنید.
+6. تماس‌ها در بخش تاریخچه ثبت می‌شوند.
+7. مخاطب‌های پرتکرار را می‌توانید در بخش کانتکت‌ها ذخیره کنید.
+
+---
+
+## Build گرفتن برای ویندوز
+
+برای ساخت خروجی ویندوز:
+
+```bash
+npm run dist:win
 ```
 
+در صورت نیاز به خروجی ساده و قابل اجرا بدون نصب‌کننده، می‌توانید از پوشه خروجی unpacked استفاده کنید:
 
-## Git / GitHub
+```text
+dist/win-unpacked
+```
 
-Before pushing to GitHub, decide whether you are legally and operationally allowed to commit `tools/pjsua/pjsua.exe`. If you want the repository to run immediately after clone, keep it. If you prefer a clean source repository, uncomment `tools/pjsua/pjsua.exe` in `.gitignore` and document where to place it.
+---
 
-Recommended first push:
+## نکات توسعه
 
-```bat
+- برای تغییر ظاهر برنامه، بیشتر با `src/renderer/styles.css` کار دارید.
+- برای تغییر رفتار دکمه‌ها و فرم‌ها، فایل `src/renderer/app.js` را ویرایش کنید.
+- برای تغییر منطق اجرای موتور تماس، فایل `src/main/pjsua-engine.js` را توسعه دهید.
+- برای تغییر اندازه پنجره یا تنظیمات Electron، فایل `src/main/main.js` را ویرایش کنید.
+- فایل‌های حجیم خروجی build و `node_modules` نباید داخل Git قرار بگیرند.
+
+---
+
+## ارسال پروژه روی Git
+
+اگر اولین بار است پروژه را روی Git می‌فرستید:
+
+```bash
 git init
 git add .
-git commit -m "Initial Sierra Phone softphone project"
+git commit -m "Initial Sierra Phone project"
 git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/sierra-phone.git
+git remote add origin YOUR_REPOSITORY_URL
 git push -u origin main
 ```
 
-Do not commit `node_modules`, `dist`, generated installers, or local `.env` files.
+قبل از push مطمئن شوید فایل‌های زیر داخل Git قرار نگیرند:
 
+```text
+node_modules/
+dist/
+release/
+*.log
+```
 
-## UI Note
-This build keeps the compact Sierra Phone window sizing from the stable PBXShop UI version, removes the side text next to the logo, and uses the uploaded PBXShop white SVG inside a slightly larger logo box.
+این موارد در `.gitignore` لحاظ شده‌اند.
+
+---
+
+## وضعیت پروژه
+
+این نسخه یک پایه قابل توسعه برای سافت‌فون دسکتاپ اختصاصی سیرا فون است. تمرکز فعلی پروژه روی سادگی، اندازه کوچک، برندینگ PBXShop و آماده بودن برای توسعه‌های بعدی است.
+
