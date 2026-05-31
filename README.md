@@ -145,21 +145,6 @@ dist/win-unpacked
 
 ---
 
-## ارسال پروژه روی Git
-
-اگر اولین بار است پروژه را روی Git می‌فرستید:
-
-```bash
-git init
-git add .
-git commit -m "Initial Sierra Phone project"
-git branch -M main
-git remote add origin YOUR_REPOSITORY_URL
-git push -u origin main
-```
-
-قبل از push مطمئن شوید فایل‌های زیر داخل Git قرار نگیرند:
-
 ```text
 node_modules/
 dist/
